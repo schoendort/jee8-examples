@@ -20,7 +20,8 @@ public class FireAsynchEventBean {
 	@PostConstruct
 	public void postConstruct() {
 		LOGGER.severe(() -> "firing event");
-		eventBus.fireAsync(new MyEvent("asynch"));
+		eventBus.fireAsync(new MyEvent("asynch"))
+				.thenAccept(event -> LOGGER.severe(() -> "event process completed " + event));
 		LOGGER.severe(() -> "firing event finished");
 	}
 }
