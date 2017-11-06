@@ -10,9 +10,9 @@ import javax.inject.Inject;
 
 @Singleton
 @Startup
-public class FireSynchEventBean {
+public class FireAsynchEventBean {
 
-	private static final Logger LOGGER = Logger.getLogger(FireSynchEventBean.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(FireAsynchEventBean.class.getName());
 
 	@Inject
 	private Event<MyEvent> eventBus;
@@ -20,8 +20,7 @@ public class FireSynchEventBean {
 	@PostConstruct
 	public void postConstruct() {
 		LOGGER.severe(() -> "firing event");
-		eventBus.fire(new MyEvent("synch"));
+		eventBus.fireAsync(new MyEvent("asynch"));
 		LOGGER.severe(() -> "firing event finished");
 	}
-
 }
