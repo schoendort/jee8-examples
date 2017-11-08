@@ -13,6 +13,8 @@ public class MyApplication extends Application {
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> resources = new HashSet<>();
 		resources.add(MyResource.class);
+		resources.add(MySimpleChat.class);
 		return resources;
 	}
+
 }

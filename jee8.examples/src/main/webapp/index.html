@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>mychat</title>
+</head>
+<body>
+<textarea id="nameArea" rows="1" cols="20">
+</textarea>
+<button type="button" onclick="register()">register</button>
+<br/>
+<textarea id="chat">
+</textarea>
+<br/>
+<textarea id="message">
+</textarea>
+<button type="button" onclick="send()">send</button>
+<script type="text/javascript">
+	var evtSource;
+	var name = "";
+	function register(){
+		name = document.getElementById("nameArea").value;
+		evtSource = new EventSource("jax/chat/"+ name);
+		evtSource.onmessage = function(e) {
+			document.getElementById("chat").value = document.getElementById("chat").value + "\n" + e.data;
+		}
+	}
+	function send(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "jax/chat/"+name, true);
+		xhttp.setRequestHeader("Content-type", "text/plain");
+		xhttp.send(document.getElementById("message").value);
+	}
+</script>
+</body>
+</html>
